@@ -11,6 +11,8 @@ import subprocess
 
 messageCome = ""
 
+bedugMode = True
+
 def openLink():
     url = 'http://localhost:3000/'
     chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
@@ -20,6 +22,9 @@ def callZoom():
     openLink()
     call(["node", "index.js"])
 
+def closeZoom():
+    print("something")
+
 def getZoom(message):
     #  gogo all cmd
     msg = message.split(" ")
@@ -27,6 +32,7 @@ def getZoom(message):
         callZoom()
         print("open zoom id demo1 !!! ")
     else:
+        closeZoom()
         print("close zoom id demo1 !!! ")
 
 
@@ -49,8 +55,12 @@ if __name__=='__main__':
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
-    client.connect("soldier.cloudmqtt.com",14222,61)
-    client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
+    if(bedugMode == True):
+        client.connect("soldier.cloudmqtt.com",14222,61)
+        client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
+    else:
+        client.connect("soldier.cloudmqtt.com",14222,61)
+        client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
     client.loop_forever()
 
 
