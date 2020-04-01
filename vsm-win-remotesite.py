@@ -1,34 +1,35 @@
-# from classes.testGogo.py import TestGogo
-import classes.testGogo as test
-# import classes.gogotalk as gogotalk
-#import classes.gogotalk_on_win as gogotalk
-import paho.mqtt.client as mqtt
-import webbrowser
 from subprocess import call
+
+import paho.mqtt.client as mqtt
+import webbrowser as edge
 import os
 import signal
 import subprocess
+import time
 
 messageCome = ""
+bedugMode = True
 
-def openLink():
-    url = 'http://localhost:3000/'
-    chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-    webbrowser.get(chrome_path).open(url)
-
-def callZoom():
-    openLink()
-    call(["node", "index.js"])
-
+def closeZoom():
+    try:
+        os.system('TASKKILL /F /IM MicrosoftEdge.exe')
+        os.system('TASKKILL /F /IM Zoom.exe')
+    except Exception , err:
+        print str(err)
+    
+def openBrowser():
+    url_demo1 = 'https://zoom.us/j/7602679734'
+    edge.open_new(url_demo1)
+    
 def getZoom(message):
     #  gogo all cmd
     msg = message.split(" ")
     if (msg[0] == "open"):
-        callZoom()
         print("open zoom id demo1 !!! ")
-    else:
+        openBrowser()
+    elif (msg[0] == "close"):
         print("close zoom id demo1 !!! ")
-
+        closeZoom()
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with Code : "+ str(rc))
@@ -39,18 +40,21 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata,msg):
     messageCome = str(msg.payload.decode("utf-8"))
     # do something here 
-    getZoom(messageCome)
     print("print msg : "+messageCome)
+    getZoom(messageCome)
     
-
 if __name__=='__main__':
     print("mqtt starting")
-    # mqttConnect()
+    # mqttConnect 
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
-    client.connect("soldier.cloudmqtt.com",14222,61)
-    client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
+    if(bedugMode == True):
+        client.connect("soldier.cloudmqtt.com",14222,60)
+        client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
+    else:
+        client.connect("soldier.cloudmqtt.com",14222,60)
+        client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
     client.loop_forever()
 
 
