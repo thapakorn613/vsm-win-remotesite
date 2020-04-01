@@ -8,6 +8,7 @@ import subprocess
 import time
 
 messageCome = ""
+
 bedugMode = True
 
 def closeZoom():
@@ -26,6 +27,7 @@ def getZoom(message):
     msg = message.split(" ")
     if (msg[0] == "open"):
         print("open zoom id demo1 !!! ")
+
         openBrowser()
     elif (msg[0] == "close"):
         print("close zoom id demo1 !!! ")
@@ -56,7 +58,3 @@ if __name__=='__main__':
         client.connect("soldier.cloudmqtt.com",14222,60)
         client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
     client.loop_forever()
-
-
-
-
