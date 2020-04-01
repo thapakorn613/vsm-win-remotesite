@@ -1,7 +1,7 @@
 //include required modules
 
 const jwt = require("jsonwebtoken");
-const config = require("./config");
+const config = require("./config_demo1");
 const rp = require("request-promise");
 var path = require("path");
 
@@ -33,7 +33,7 @@ const edge = require("windows-edge");
 app.get("/", (req, res) => {
   //store the email address of the user in the email variable
   //   email = req.body.email;
-  email = "thapakorn613@gmail.com";
+  email = "remotelab.demo1@gmail.com";
   //check if the email was stored in the console
   console.log("start zoom ");
   //Store the options for Zoom API which will be used to make an API call later.
@@ -93,7 +93,6 @@ app.get("/", (req, res) => {
       console.log("API call failed, reason ", err);
     });
 });
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 setTimeout(() => {

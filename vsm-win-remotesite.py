@@ -26,6 +26,7 @@ def getZoom(message):
     msg = message.split(" ")
     if (msg[0] == "open"):
         print("open zoom id demo1 !!! ")
+
         openBrowser()
     elif (msg[0] == "close"):
         print("close zoom id demo1 !!! ")
