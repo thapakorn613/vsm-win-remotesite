@@ -8,7 +8,7 @@ import subprocess
 import time
 
 messageCome = ""
-bedugMode = True
+bedugMode = False
 
 def closeZoom():
     try:
@@ -53,10 +53,10 @@ if __name__=='__main__':
         client.connect("soldier.cloudmqtt.com",14222,60)
         client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
     else:
-        client.connect("soldier.cloudmqtt.com",14222,60)
-        client.username_pw_set("obpkkwdc","1lUnSF15XpWM")
+        client.connect("35.198.231.150",1883,60)
     client.loop_forever()
 
 
 
 
+ 
